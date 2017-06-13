@@ -54,13 +54,13 @@ func (m *Map) Get(key string) string {
 
 	hash := int(m.hash([]byte(key)))
 
-	// Binary search for appropriate replica.
-	idx := sort.Search(len(m.keys), func(i int) bool { return m.keys[i] >= hash })
-
-	// Means we have cycled back to the first replica.
-	if idx == len(m.keys) {
-		idx = 0
+	// 顺时针“行走”，找到第一个大于哈希值的节点
+	for _, v := range m.keys {
+		if v >= hash {
+			return m.hashMap[v] // 返回真实节点
+		}
 	}
 
-	return m.hashMap[m.keys[idx]]
+	// hash值大于最大节点哈希值的情况
+	return m.hashMap[m.keys[0]]
 }
