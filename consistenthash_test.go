@@ -28,6 +28,10 @@ func TestHashing(t *testing.T) {
 			t.Errorf("Asking for %s, should have yielded %s", k, v)
 		}
 	}
+
+	for _, key := range testCases {
+		hash.Remove(key)
+	}
 }
 
 func TestConsistency(t *testing.T) {
