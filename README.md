@@ -1,2 +1,2 @@
 # consistenthash
- Implementing Consistency Hash Algorithm with golang
+ Implementing consistent hash algorithm with golang
